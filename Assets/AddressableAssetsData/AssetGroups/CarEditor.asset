@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CarEditor
+  m_EditorClassIdentifier: 
+  m_GroupName: CarEditor
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6f504691f3b4fbb449553eb775cff4b2
+  m_SerializeEntries:
+  - m_GUID: 317867796847aa145b2431f56172b943
+    m_Address: Assets/Prefabs/Decals/Decal01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a41164b52b294584db6b1455af55679f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: cb47d8a3813fb1f4194867379dc398a5, type: 2}
+    - {fileID: 11400000, guid: 7503de29704b08744bfe1dc482490790, type: 2}
