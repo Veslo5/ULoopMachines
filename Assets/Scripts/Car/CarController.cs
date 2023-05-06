@@ -23,22 +23,21 @@ public class CarController : MonoBehaviour
     //Components
     Rigidbody2D carRigidbody2D;
 
-
-    PlayerInput input;
+    PlayInput playerInput;
 
 
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
-        input = GetComponent<PlayerInput>();
+        playerInput = GameObject.Find("**PLAYER**/Player1Controller").GetComponent<PlayInput>();
     }
 
 
     void Update()
     {
-        steeringInput = input.actions["Horizontal"].ReadValue<float>();
-        accelerationInput = input.actions["Vertical"].ReadValue<float>();
+        this.steeringInput = playerInput.steeringInput;
+        this.accelerationInput = playerInput.accelerationInput;
     }
 
     //Frame-rate independent for physics calculations.
