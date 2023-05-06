@@ -44,7 +44,7 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _GraduationScale: 1
-    - _Scale: 2
+    - _Scale: 12
     - _SecondaryFadeInSpeed: 0.5
     - _Thickness: 0.001
     m_Colors:

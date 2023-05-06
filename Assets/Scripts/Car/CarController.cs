@@ -12,6 +12,10 @@ public class CarController : MonoBehaviour
     public float turnFactor = 3.5f;
     public float maxSpeed = 20;
 
+
+    public AnimationCurve JumpCurve;
+    private bool jumping;
+
     //Local variables
     float accelerationInput = 0;
     float steeringInput = 0;
@@ -25,12 +29,27 @@ public class CarController : MonoBehaviour
 
     PlayInput playerInput;
 
+    SpriteRenderer carSpriteRenderer;
+    SpriteRenderer colorSpriteRenderer;
+    SpriteRenderer lightsSpriteRenderer;
+    SpriteRenderer windowsSpriteRenderer;
+
+    BoxCollider2D carCollider;
+
 
     //Awake is called when the script instance is being loaded.
     void Awake()
     {
         carRigidbody2D = GetComponent<Rigidbody2D>();
         playerInput = GameObject.Find("**PLAYER**/Player1Controller").GetComponent<PlayInput>();
+
+        carSpriteRenderer = this.transform.Find("car").GetComponent<SpriteRenderer>();
+        colorSpriteRenderer = this.transform.Find("color").GetComponent<SpriteRenderer>();
+        lightsSpriteRenderer = this.transform.Find("lights").GetComponent<SpriteRenderer>();
+        windowsSpriteRenderer = this.transform.Find("windows").GetComponent<SpriteRenderer>();
+
+        carCollider = this.GetComponent<BoxCollider2D>();
+
     }
 
 
@@ -38,6 +57,12 @@ public class CarController : MonoBehaviour
     {
         this.steeringInput = playerInput.SteeringInput;
         this.accelerationInput = playerInput.AccelerationInput;
+
+        if (playerInput.SpaceAction.Click)
+        {
+            this.Jump(1.0f, 1.0f);
+        }
+
     }
 
     //Frame-rate independent for physics calculations.
@@ -52,6 +77,12 @@ public class CarController : MonoBehaviour
 
     void ApplyEngineForce()
     {
+
+        // if (jumping && accelerationInput > 0)
+        // {
+        //     accelerationInput = 0;
+        // }
+
         //Apply drag if there is no accelerationInput so the car stops when the player lets go of the accelerator
         if (accelerationInput == 0)
             carRigidbody2D.drag = Mathf.Lerp(carRigidbody2D.drag, 3.0f, Time.fixedDeltaTime * 3);
@@ -69,7 +100,7 @@ public class CarController : MonoBehaviour
             return;
 
         //Limit so we cannot go faster in any direction while accelerating
-        if (carRigidbody2D.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0)
+        if (carRigidbody2D.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0 && jumping == false)
             return;
 
         //Create a force for the engine
@@ -81,6 +112,12 @@ public class CarController : MonoBehaviour
 
     void ApplySteering()
     {
+
+        if (jumping)
+        {
+            return;
+        }
+
         //Limit the cars ability to turn when moving slowly
         float minSpeedBeforeAllowTurningFactor = (carRigidbody2D.velocity.magnitude / 2);
         minSpeedBeforeAllowTurningFactor = Mathf.Clamp01(minSpeedBeforeAllowTurningFactor);
@@ -113,6 +150,9 @@ public class CarController : MonoBehaviour
         lateralVelocity = GetLateralVelocity();
         isBraking = false;
 
+        if (jumping)
+            return false;
+
         //Check if we are moving forward and if the player is hitting the brakes. In that case the tires should screech.
         if (accelerationInput < 0 && velocityVsUp > 0)
         {
@@ -131,4 +171,62 @@ public class CarController : MonoBehaviour
     {
         return carRigidbody2D.velocity.magnitude;
     }
+
+    public void Jump(float jumpHeightScale, float jumpPushScale)
+    {
+
+        if (jumping == false)
+        {
+            StartCoroutine(JumpCoroutine(jumpHeightScale, jumpPushScale));
+        }
+
+    }
+
+    private IEnumerator JumpCoroutine(float jumpHeightScale, float jumpPushScale)
+    {
+        jumping = true;
+
+        var jumpStartTime = Time.time;
+        var jumpDuration = carRigidbody2D.velocity.magnitude * 0.05f;
+
+        jumpHeightScale = jumpHeightScale * carRigidbody2D.velocity.magnitude * 0.05f;
+        jumpHeightScale = Mathf.Clamp(jumpHeightScale, 0f, 1f);
+
+        this.carCollider.enabled = false;
+
+        carRigidbody2D.AddForce(carRigidbody2D.velocity.normalized * jumpPushScale * 10, ForceMode2D.Impulse);
+
+        while (jumping)
+        {
+
+            var completedPercentange = (Time.time - jumpStartTime) / jumpDuration;
+            completedPercentange = Mathf.Clamp01(completedPercentange);
+
+            this.transform.localScale = Vector3.one + Vector3.one * JumpCurve.Evaluate(completedPercentange) * jumpHeightScale;
+
+            if (completedPercentange == 1.0f)
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        if (Physics2D.OverlapCircle(transform.position, 1.5f))
+        {
+            jumping = false;
+            Jump(0.2f, 0.6f);
+        }
+        else
+        {
+            this.transform.localScale = Vector3.one;
+            this.carCollider.enabled = true;
+
+            jumping = false;
+        }
+
+
+
+    }
+
 }
