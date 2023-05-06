@@ -25,8 +25,35 @@
                 },
                 {
                     "name": "CLICK",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b1cc1245-cbee-47ea-bf59-da4798107130",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RIGHTCLICK",
+                    "type": "Value",
+                    "id": "936a7adf-6f50-42b5-96dd-777cf28e39a4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SCROLL",
+                    "type": "PassThrough",
+                    "id": "8bb8c07d-5d2d-410f-b8a0-224d74715449",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SPACE",
+                    "type": "Value",
+                    "id": "a0f75224-057d-4135-9854-3c58392d8222",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -141,6 +168,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "CLICK",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "007627c0-594b-4d0a-9a25-c9b29693135a",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RIGHTCLICK",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f58f5bb-c3a9-4c6e-a139-52e9ed34334d",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SCROLL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6568716-8d48-42a3-9d09-3a03d35cd18f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SPACE",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

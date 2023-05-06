@@ -36,8 +36,8 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        this.steeringInput = playerInput.steeringInput;
-        this.accelerationInput = playerInput.accelerationInput;
+        this.steeringInput = playerInput.SteeringInput;
+        this.accelerationInput = playerInput.AccelerationInput;
     }
 
     //Frame-rate independent for physics calculations.
