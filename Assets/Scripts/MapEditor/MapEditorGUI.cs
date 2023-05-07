@@ -39,18 +39,18 @@ public class MapEditorGUI : MonoBehaviour
 
         if (GUI.Button(new Rect(10, 10, 150, 30), "Spawn road straight"))
         {
-            MapEditor.Instance.RoadSpawner.Create(RoadType.STRAIGH, SetName);
+            MapEditor.Instance.MapSpawner.SpawnRoad(RoadType.STRAIGH, SetName, true);
         }
 
 
         if (GUI.Button(new Rect(160, 10, 150, 30), "Spawn road 90 curve"))
         {
-            MapEditor.Instance.RoadSpawner.Create(RoadType.CURVE, SetName);
+            MapEditor.Instance.MapSpawner.SpawnRoad(RoadType.CURVE, SetName, true);
         }
 
         if (GUI.Button(new Rect(10, 40, 200, 30), "Spawn background"))
         {
-            MapEditor.Instance.BackgroundSpawner.Create(SetName);
+            MapEditor.Instance.MapSpawner.SpawnBackground(SetName, true);
         }
 
         if (MapEditor.Instance.CurrentSelectedObject != null)
@@ -96,6 +96,11 @@ public class MapEditorGUI : MonoBehaviour
             if (GUI.Button(new Rect(110, 230, 100, 30), "Deselect"))
             {
                 MapEditor.Instance.CurrentSelectedObject = null;
+            }
+
+            if (GUI.Button(new Rect(10, 270, 100, 30), "Test Map"))
+            {
+                Debug.Log(MapLoader.Instance.GetJsonTrack());
             }
 
 

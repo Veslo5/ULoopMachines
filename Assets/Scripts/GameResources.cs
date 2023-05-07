@@ -35,10 +35,12 @@ public class GameResources : Singleton<GameResources>
         }
     }
 
-    public Sprite GetSprite(string set, string name)
+    public Sprite GetSprite(string set, string path)
     {
-        return loadedSpriteSets[set].GetSpriteResource(set + "/" + name);
+        return loadedSpriteSets[set].GetSpriteResource(path);
     }
+
+    
 
 
 

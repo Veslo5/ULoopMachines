@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class MapEditor : Singleton<MapEditor>
 {
     public Vector2 SnappingGridSize = new Vector2(16, 16); 
-    public BackgroundSpawner BackgroundSpawner;
-    public RoadSpawner RoadSpawner;
+    public MapSpawner MapSpawner;
     public GameObject CurrentSelectedObject = null;
     public Camera EditorCamera;
     public MapEditorView MapeEditorView;
@@ -21,8 +20,7 @@ public class MapEditor : Singleton<MapEditor>
     {
         base.Awake();
 
-        BackgroundSpawner = new BackgroundSpawner();
-        RoadSpawner = new RoadSpawner();
+        MapSpawner = new MapSpawner();
 
         EditorCamera = Camera.main;        
 
