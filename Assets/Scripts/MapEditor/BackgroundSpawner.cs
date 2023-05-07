@@ -8,14 +8,14 @@ public class BackgroundSpawner
     int objectID = 0;
 
 
-    public void Create()
+    public void Create(string set)
     {
         objectID++;
 
         var name = "background" + objectID;
         var go = new GameObject(name);
         var spriteRenderer = go.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = MapEditorResources.Instance.Grass001;
+        spriteRenderer.sprite = GameResources.Instance.GetSprite(set, GameResources.BACKGROUND1);
 
         var size = new Vector2( spriteRenderer.sprite.texture.width / 100f,  spriteRenderer.sprite.texture.height / 100f);
 

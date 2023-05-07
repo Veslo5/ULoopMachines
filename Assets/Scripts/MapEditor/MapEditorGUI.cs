@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MapEditorGUI : MonoBehaviour
 {
+
+    public string SetName = "Prototype";
     public string positionX, positionY;
     public string sizeX, sizeY;
 
@@ -12,8 +14,9 @@ public class MapEditorGUI : MonoBehaviour
     {
     }
 
-    private void Start() {
-        
+    private void Start()
+    {
+
         MapEditor.Instance.CurrentObjectSelectionChanged.AddListener(ObjectSelectionChanged);
     }
 
@@ -31,15 +34,23 @@ public class MapEditorGUI : MonoBehaviour
 
     void OnGUI()
     {
+        GUI.TextField(new Rect(0, 0, 50, 30), SetName);
 
-        if (GUI.Button(new Rect(10, 10, 100, 30), "Spawn road"))
+
+        if (GUI.Button(new Rect(10, 10, 150, 30), "Spawn road straight"))
         {
-            MapEditor.Instance.RoadSpawner.Create();
+            MapEditor.Instance.RoadSpawner.Create(RoadType.STRAIGH, SetName);
+        }
+
+
+        if (GUI.Button(new Rect(160, 10, 150, 30), "Spawn road 90 curve"))
+        {
+            MapEditor.Instance.RoadSpawner.Create(RoadType.CURVE, SetName);
         }
 
         if (GUI.Button(new Rect(10, 40, 200, 30), "Spawn background"))
         {
-            MapEditor.Instance.BackgroundSpawner.Create();
+            MapEditor.Instance.BackgroundSpawner.Create(SetName);
         }
 
         if (MapEditor.Instance.CurrentSelectedObject != null)
@@ -57,7 +68,19 @@ public class MapEditorGUI : MonoBehaviour
             sizeY = GUI.TextField(new Rect(120, 150, 50, 30), sizeY);
             // GUI.TextField(new Rect(170, 150, 50, 30), "0");
 
-            if (GUI.Button(new Rect(10, 190, 100, 30), "Apply"))
+
+            GUI.Label(new Rect(10, 190, 60, 30), "Rotate:");
+            if (GUI.Button(new Rect(70, 190, 40, 30), "+90"))
+            {
+                MapEditor.Instance.CurrentSelectedObject.transform.Rotate(new Vector3(0, 0, 90));
+            }
+
+            if (GUI.Button(new Rect(120, 190, 40, 30), "-90"))
+            {
+                MapEditor.Instance.CurrentSelectedObject.transform.Rotate(new Vector3(0, 0, -90));
+            }
+
+            if (GUI.Button(new Rect(10, 230, 100, 30), "Apply"))
             {
                 //100 = pixel per unit 
 
@@ -70,7 +93,7 @@ public class MapEditorGUI : MonoBehaviour
                 MapEditor.Instance.CurrentSelectedObject.transform.position = new Vector3(Convert.ToInt32(positionX), Convert.ToInt32(positionX), 0);
             }
 
-            if (GUI.Button(new Rect(110, 190, 100, 30), "Deselect"))
+            if (GUI.Button(new Rect(110, 230, 100, 30), "Deselect"))
             {
                 MapEditor.Instance.CurrentSelectedObject = null;
             }

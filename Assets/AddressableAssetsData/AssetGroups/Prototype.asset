@@ -10,20 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Game
+  m_Name: Prototype
   m_EditorClassIdentifier: 
-  m_GroupName: Game
+  m_GroupName: Prototype
   m_Data:
     m_SerializedData: []
-  m_GUID: 35c87347c01a0eb4fa0858739482f430
+  m_GUID: 4e45df274a924974ca0479bbdbbe2379
   m_SerializeEntries:
-  - m_GUID: 44c9d2ab18fd568488bf52f7a2bf5928
-    m_Address: Assets/Sprites/default.png
+  - m_GUID: d44aacba7d426204a9c242f06c619e38
+    m_Address: Prototype/background_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 01615b2e66e0a5e41938b5079f0060b6
+    m_Address: Prototype/medium_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2d41038264ad28d4481ce7a3b80cdb11
+    m_Address: Prototype/round90_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a41164b52b294584db6b1455af55679f, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: cf1ff42cf4b786747acb55b16165954f, type: 2}
-    - {fileID: 11400000, guid: 663dc41027707254e91bffc4604c0f80, type: 2}
+    - {fileID: 11400000, guid: e39dee9ce694d134a9e31d5af5a0b9c9, type: 2}
+    - {fileID: 11400000, guid: 31b4475bbed0f3f4788038bea8cf8513, type: 2}

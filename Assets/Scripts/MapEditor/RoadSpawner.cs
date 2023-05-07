@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum RoadType
+{
+    STRAIGH = 0,
+    CURVE = 1
+}
+
+
 public class RoadSpawner
 {
     private Dictionary<string, GameObject> roadObjects = new Dictionary<string, GameObject>();
     int objectID = 0;
 
-    public void Create()
+    public void Create(RoadType roadtype, string set)
     {
 
         objectID++;
@@ -15,9 +23,19 @@ public class RoadSpawner
         var name = "road" + objectID;
         var go = new GameObject(name);
         var spriteRenderer = go.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = MapEditorResources.Instance.Road001;
 
-        var size = new Vector2( spriteRenderer.sprite.texture.width / 100f,  spriteRenderer.sprite.texture.height / 100f);
+        switch (roadtype)
+        {
+            case RoadType.STRAIGH:
+                spriteRenderer.sprite = GameResources.Instance.GetSprite(set, GameResources.MEDIUM1);
+                break;
+            case RoadType.CURVE:
+                spriteRenderer.sprite = GameResources.Instance.GetSprite(set, GameResources.ROUND901);
+                break;
+        }
+
+
+        var size = new Vector2(spriteRenderer.sprite.texture.width / 100f, spriteRenderer.sprite.texture.height / 100f);
 
         spriteRenderer.drawMode = SpriteDrawMode.Tiled;
         spriteRenderer.size = size;
