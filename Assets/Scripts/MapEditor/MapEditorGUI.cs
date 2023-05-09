@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MapEditorGUI : MonoBehaviour
 {
@@ -100,7 +101,8 @@ public class MapEditorGUI : MonoBehaviour
 
             if (GUI.Button(new Rect(10, 270, 100, 30), "Test Map"))
             {
-                Debug.Log(MapLoader.Instance.GetJsonTrack());
+                // Debug.Log(MapLoader.Instance.GetJsonTrack());
+                SceneManager.LoadScene("Track");
             }
 
 

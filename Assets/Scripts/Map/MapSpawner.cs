@@ -31,7 +31,7 @@ public class MapSpawner
                 assetPath = set + "/" + GameResources.MEDIUM1;
                 break;
             case RoadType.CURVE:
-                assetPath = set + "/" + GameResources.ROUND901;
+                assetPath = set + "/" + GameResources.ROUND90M1;
                 break;
         }
 

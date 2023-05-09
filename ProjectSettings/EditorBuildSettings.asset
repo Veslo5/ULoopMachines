@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/IngameEditor.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/Scenes/Menu.unity
+    guid: 9ca6685cd9a41c84791b5c1f272f0d8a
+  - enabled: 1
+    path: Assets/Scenes/MapEditor.unity
+    guid: f87d6983c339eff4a9e1f00c260e736f
+  - enabled: 1
+    path: Assets/Scenes/Track.unity
+    guid: d48bed68264e654438baa74b017605a5
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e9e8c6f6ab6e05141809e89fb3c564eb, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 67e373cb0f6f72342ae55474dc48cca9, type: 2}

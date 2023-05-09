@@ -9,7 +9,7 @@ public class GameResources : Singleton<GameResources>
 
     public const string BACKGROUND1 = "background_1";
     public const string MEDIUM1 = "medium_1";
-    public const string ROUND901 = "round90_1";
+    public const string ROUND90M1 = "round90_m_1";
 
     private Dictionary<string, SpriteSetResource> loadedSpriteSets = new Dictionary<string, SpriteSetResource>();
 
@@ -31,7 +31,7 @@ public class GameResources : Singleton<GameResources>
         {
             spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + BACKGROUND1);
             spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MEDIUM1);
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + ROUND901);
+            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + ROUND90M1);
         }
     }
 
@@ -40,7 +40,11 @@ public class GameResources : Singleton<GameResources>
         return loadedSpriteSets[set].GetSpriteResource(path);
     }
 
-    
+    public void UnloadResources(){
+
+        
+
+    }
 
 
 
