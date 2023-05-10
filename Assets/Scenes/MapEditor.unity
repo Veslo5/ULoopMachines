@@ -750,10 +750,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPersistant: 0
+  MapLoader: {fileID: 0}
+  MapEditorView: {fileID: 0}
   SnappingGridSize: {x: 8, y: 8}
   CurrentSelectedObject: {fileID: 0}
   EditorCamera: {fileID: 0}
-  MapeEditorView: {fileID: 0}
   CurrentObjectSelectionChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1003,7 +1004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584063698}
   m_Layer: 0
-  m_Name: '**ENVIRONMENT**'
+  m_Name: '**DATA**'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1153,7 +1154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0bf5da310cf94040afb5b743027c91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsPersistant: 0
 --- !u!1 &2113232907
 GameObject:
   m_ObjectHideFlags: 0

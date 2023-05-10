@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapLoader : Singleton<MapLoader>
+public class MapLoader : MonoBehaviour
 {
 
-    public string GetJsonTrack(){
+    public static MapLoader FindMe() => GameObject.Find("**DATA**/MapLoader").GetComponent<MapLoader>();
+
+    public string GetJsonTrack()
+    {
         var goObjects = GameObject.FindGameObjectsWithTag(Globals.TAG_EDITOR);
 
         var mapData = new MapData();
@@ -13,7 +16,8 @@ public class MapLoader : Singleton<MapLoader>
         foreach (var go in goObjects)
         {
             var prop = go.GetComponent<MapEditorProperty>();
-            mapData.TrackParts.Add(new TrackPart{
+            mapData.TrackParts.Add(new TrackPart
+            {
                 Position = go.transform.position,
                 Rotation = go.transform.rotation.eulerAngles,
                 Scale = go.transform.localScale,
@@ -23,23 +27,33 @@ public class MapLoader : Singleton<MapLoader>
                 CustomType = prop.CustomType
             });
             Debug.Log(go.name);
-        } 
+        }
 
         return JsonUtility.ToJson(mapData);
 
     }
 
-
-    public void SaveToDisc(){
+    public void SaveToDisc()
+    {
 
     }
 
-    public void SaveToPrefs(){
-        PlayerPrefs.SetString("editormap", GetJsonTrack());
+    public void SaveToPrefs()
+    {
+        Session.Instance.SetString("editorMap", GetJsonTrack());
     }
 
-    public MapData LoadFromPrefs(){
-        return JsonUtility.FromJson<MapData>(PlayerPrefs.GetString("editormap"));
+    public MapData LoadFromPrefs()
+    {
+        if (Session.Instance.HasKey("editorMap"))
+        {
+            return JsonUtility.FromJson<MapData>(Session.Instance.GetString("editorMap"));
+        }
+        else
+        {
+            return null;
+        }
+
     }
 
 }

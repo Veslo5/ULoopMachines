@@ -22,12 +22,12 @@ public class MapEditorInput : MonoBehaviour
 
     private void SpaceDragStart()
     {
-        MapEditor.Instance.MapeEditorView.StartDrag(Mouse.current.position.value);
+        MapEditor.Instance.MapEditorView.StartDrag(Mouse.current.position.value);
     }
 
     private void SpaceDragEnd()
     {
-        MapEditor.Instance.MapeEditorView.EndDrag(Mouse.current.position.value);
+        MapEditor.Instance.MapEditorView.EndDrag(Mouse.current.position.value);
 
     }
 
@@ -47,13 +47,13 @@ public class MapEditorInput : MonoBehaviour
         // Scroll
         if (playerInput.Scroll > 0)
         {
-            MapEditor.Instance.MapeEditorView.Zoom();
+            MapEditor.Instance.MapEditorView.Zoom();
         }
         else if (playerInput.Scroll < 0)
         {
-            MapEditor.Instance.MapeEditorView.UnZoom();
+            MapEditor.Instance.MapEditorView.UnZoom();
         }
 
-        MapEditor.Instance.MapeEditorView.CustomUpdate(Mouse.current.position.value);
+        MapEditor.Instance.MapEditorView.CustomUpdate(Mouse.current.position.value);
     }
 }

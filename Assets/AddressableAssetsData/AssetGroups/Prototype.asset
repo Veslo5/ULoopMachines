@@ -49,6 +49,10 @@ MonoBehaviour:
     m_Address: Prototype/large_1
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 43d362c605183b14eb5ee33d6b67db62
+    m_Address: Cars/Ghost/ghost
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a41164b52b294584db6b1455af55679f, type: 2}
   m_SchemaSet:

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class MapBuilder : MonoBehaviour
 {
+
+    public static MapBuilder FindMe() => GameObject.Find("**TRACK**/MapBuilder").GetComponent<MapBuilder>();
+
     public MapSpawner MapSpawner;
 
     private void Awake()
@@ -13,20 +16,25 @@ public class MapBuilder : MonoBehaviour
     }
 
     public void BuildMap(MapData mapData)
-    {        
+    {
         foreach (var roadPart in mapData.TrackParts)
         {
             var type = (TrackPropertyType)Enum.Parse(typeof(TrackPropertyType), roadPart.Type);
+            GameObject go = null;
             switch (type)
             {
                 case TrackPropertyType.BACKGROUND:
-                var bgGo = MapSpawner.SpawnBackground(roadPart.Set, false);
-                break;
+                    go = MapSpawner.SpawnBackground(roadPart.Set, false);
+                    break;
 
                 case TrackPropertyType.ROAD:
-                var rGo = MapSpawner.SpawnRoad((MapParts)Enum.Parse(typeof(MapParts), roadPart.CustomType), roadPart.Set, false);
-                break;
+                    go = MapSpawner.SpawnRoad((MapParts)Enum.Parse(typeof(MapParts), roadPart.CustomType), roadPart.Set, false);
+                    break;
             }
+            
+            go.transform.position = roadPart.Position;
+            go.transform.localScale = roadPart.Scale;
+            go.transform.eulerAngles = roadPart.Rotation;
         }
     }
 }

@@ -139,8 +139,9 @@ public class MapEditorGUI : MonoBehaviour
 
         if (GUI.Button(new Rect((Screen.width / 2) - 50, 20, 100, 30), "Test Map"))
         {
-            Debug.Log(MapLoader.Instance.GetJsonTrack());
-            MapLoader.Instance.SaveToPrefs();
+            var mapLoader = MapEditor.Instance.MapLoader;
+            Debug.Log(mapLoader.GetJsonTrack());
+            mapLoader.SaveToPrefs();
             SceneManager.LoadScene("Track");
         }
 

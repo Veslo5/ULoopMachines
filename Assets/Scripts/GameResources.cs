@@ -16,6 +16,10 @@ public enum MapParts
 
 }
 
+public enum StuffParts{
+    roadcone_1 = 0
+}
+
 public class GameResources : Singleton<GameResources>
 {
     [SerializeField]
@@ -47,6 +51,7 @@ public class GameResources : Singleton<GameResources>
             spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.round90_m_1.ToString());
             spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.transition_ms_1.ToString());
             spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.transition_ml_1.ToString());
+
         }
     }
 

@@ -6,11 +6,16 @@ using UnityEngine.Events;
 
 public class MapEditor : Singleton<MapEditor>
 {
-    public Vector2 SnappingGridSize = new Vector2(8, 8); 
     public MapSpawner MapSpawner;
+    public MapLoader MapLoader;
+    public MapEditorView MapEditorView;
+
+    public Vector2 SnappingGridSize = new Vector2(8, 8); 
+
     public GameObject CurrentSelectedObject = null;
+
     public Camera EditorCamera;
-    public MapEditorView MapeEditorView;
+    
 
     public UnityEvent<GameObject> CurrentObjectSelectionChanged;
     public UnityEvent<GameObject> CurrentObjectSelectionMoved;
@@ -24,9 +29,11 @@ public class MapEditor : Singleton<MapEditor>
 
         EditorCamera = Camera.main;        
 
-        MapeEditorView = GetComponent<MapEditorView>();
+        MapEditorView = GetComponent<MapEditorView>();
 
         CurrentObjectSelectionChanged = new UnityEvent<GameObject>();
+
+        MapLoader = MapLoader.FindMe();
     }
 
 
