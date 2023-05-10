@@ -26,27 +26,27 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: e059fe0f3d0195a4e8ccce8631ec2dee
-    m_Address: Prototype/transition_ms_1.png
+    m_Address: Prototype/transition_ms_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: fd82ee4fe7739974cb4dfc8570455163
-    m_Address: Prototype/transition_ml_1.png
+    m_Address: Prototype/transition_ml_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: c3436f6ed37912b4aba79393407f9836
-    m_Address: Prototype/small_1.png
+    m_Address: Prototype/small_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 49ec857418e73c644b33f2d9a9d2af18
-    m_Address: Prototype/round90_s_1.png
+    m_Address: Prototype/round90_s_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: a4f4094b134093c40adc88f61c2a654c
-    m_Address: Prototype/round90_m_1.png
+    m_Address: Prototype/round90_m_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 85fec18b694ca18459c25ef2570f066f
-    m_Address: Prototype/large_1.png
+    m_Address: Prototype/large_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

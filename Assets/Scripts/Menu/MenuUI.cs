@@ -16,8 +16,8 @@ public class MenuUI : MonoBehaviour
     {
 
         btn_Play = GameObject.Find("Canvas/Btn_Play").GetComponent<Button>();
-        btn_MapEditor = GameObject.Find("Canvas/Btn_Play").GetComponent<Button>();
-        btn_Quit = GameObject.Find("Canvas/Btn_Play").GetComponent<Button>();
+        btn_MapEditor = GameObject.Find("Canvas/Btn_MapEditor").GetComponent<Button>();
+        btn_Quit = GameObject.Find("Canvas/Btn_Quit").GetComponent<Button>();
 
         btn_Play.onClick.AddListener(btn_Play_Click);
         btn_MapEditor.onClick.AddListener(btn_MapEditor_Click);
@@ -32,6 +32,7 @@ public class MenuUI : MonoBehaviour
 
     private void btn_MapEditor_Click()
     {
+        Debug.Log("test");
         SceneManager.LoadScene("MapEditor");
     }
 

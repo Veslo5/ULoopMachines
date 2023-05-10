@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class MapEditor : Singleton<MapEditor>
 {
-    public Vector2 SnappingGridSize = new Vector2(16, 16); 
+    public Vector2 SnappingGridSize = new Vector2(8, 8); 
     public MapSpawner MapSpawner;
     public GameObject CurrentSelectedObject = null;
     public Camera EditorCamera;
@@ -53,7 +53,10 @@ public class MapEditor : Singleton<MapEditor>
                     break;
                 }
             }
+        }else{
+            CurrentSelectedObject = null;
         }
+        
     }
 
     public void MoveEditorObject(Vector2 mousePos)

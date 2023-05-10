@@ -2,20 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum RoadType
-{
-    STRAIGH = 0,
-    CURVE = 1
-}
-
 public class MapSpawner
 {
 
     public int RoadID = 0;
     public int BackgroundID = 0;
 
-    public GameObject SpawnRoad(RoadType roadtype, string set, bool editor)
+    public GameObject SpawnRoad(MapParts roadtype, string set, bool editor)
     {
         RoadID++;
 
@@ -25,15 +18,7 @@ public class MapSpawner
 
         string assetPath = "";
 
-        switch (roadtype)
-        {
-            case RoadType.STRAIGH:
-                assetPath = set + "/" + GameResources.MEDIUM1;
-                break;
-            case RoadType.CURVE:
-                assetPath = set + "/" + GameResources.ROUND90M1;
-                break;
-        }
+                assetPath = set + "/" + roadtype.ToString();
 
         var sprite = GameResources.Instance.GetSprite(set, assetPath);
 
@@ -56,7 +41,7 @@ public class MapSpawner
         var name = "background" + RoadID;
         var go = new GameObject(name);
 
-        string assetPath = set + "/" + GameResources.BACKGROUND1;
+        string assetPath = set + "/" + MapParts.background_1;
 
         var sprite = GameResources.Instance.GetSprite(set, assetPath);
 
@@ -92,6 +77,7 @@ public class MapSpawner
         prop.Type = type;
         prop.SpritePath = assetPath;
         prop.Set = set;
+        prop.CustomType = customType;
 
         var collider = go.AddComponent<BoxCollider2D>();
         collider.size = spriteSize;

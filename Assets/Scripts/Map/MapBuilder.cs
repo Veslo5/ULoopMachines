@@ -24,7 +24,7 @@ public class MapBuilder : MonoBehaviour
                 break;
 
                 case TrackPropertyType.ROAD:
-                var rGo = MapSpawner.SpawnRoad((RoadType)Enum.Parse(typeof(RoadType), roadPart.CustomType), roadPart.Set, false);
+                var rGo = MapSpawner.SpawnRoad((MapParts)Enum.Parse(typeof(MapParts), roadPart.CustomType), roadPart.Set, false);
                 break;
             }
         }

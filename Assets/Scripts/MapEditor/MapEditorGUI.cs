@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class MapEditorGUI : MonoBehaviour
 {
 
+
+    private Rect buildWindowRect = new Rect(Screen.width - 240, 20, 220, 500);
     public string SetName = "Prototype";
     public string positionX, positionY;
     public string sizeX, sizeY;
@@ -33,26 +35,60 @@ public class MapEditorGUI : MonoBehaviour
     }
 
 
+    private void buildWindow(int windowID)
+    {
+
+        var editor = MapEditor.Instance;
+        if (GUI.Button(new Rect(10, 20, 50, 50), "S"))
+        {
+            editor.MapSpawner.SpawnRoad(MapParts.small_1, SetName, true);
+        }
+
+        if (GUI.Button(new Rect(60, 20, 50, 50), "M"))
+        {
+            editor.MapSpawner.SpawnRoad(MapParts.medium_1, SetName, true);
+        }
+
+        if (GUI.Button(new Rect(110, 20, 50, 50), "L"))
+        {
+            editor.MapSpawner.SpawnRoad(MapParts.large_1, SetName, true);
+        }
+
+        if (GUI.Button(new Rect(10, 70, 50, 50), "90S"))
+        {
+            editor.MapSpawner.SpawnRoad(MapParts.round90_s_1, SetName, true);
+        }
+
+        if (GUI.Button(new Rect(60, 70, 50, 50), "90M"))
+        {
+            editor.MapSpawner.SpawnRoad(MapParts.round90_m_1, SetName, true);
+        }
+
+        if (GUI.Button(new Rect(10, 120, 50, 50), "TRNMS"))
+        {
+            editor.MapSpawner.SpawnRoad(MapParts.transition_ms_1, SetName, true);
+        }
+
+        if (GUI.Button(new Rect(60, 120, 50, 50), "TRNML"))
+        {
+            editor.MapSpawner.SpawnRoad(MapParts.transition_ml_1, SetName, true);
+        }
+
+        if (GUI.Button(new Rect(10, 170, 50, 50), "BCKG"))
+        {
+            editor.MapSpawner.SpawnBackground(SetName, true);
+        }
+
+        GUI.TextField(new Rect(10, 460, 180, 30), SetName);
+
+        GUI.DragWindow(new Rect(0, 0, 10000, 20));
+
+    }
+
     void OnGUI()
     {
-        GUI.TextField(new Rect(0, 0, 50, 30), SetName);
 
-
-        if (GUI.Button(new Rect(10, 10, 150, 30), "Spawn road straight"))
-        {
-            MapEditor.Instance.MapSpawner.SpawnRoad(RoadType.STRAIGH, SetName, true);
-        }
-
-
-        if (GUI.Button(new Rect(160, 10, 150, 30), "Spawn road 90 curve"))
-        {
-            MapEditor.Instance.MapSpawner.SpawnRoad(RoadType.CURVE, SetName, true);
-        }
-
-        if (GUI.Button(new Rect(10, 40, 200, 30), "Spawn background"))
-        {
-            MapEditor.Instance.MapSpawner.SpawnBackground(SetName, true);
-        }
+        buildWindowRect = GUI.Window(0, buildWindowRect, buildWindow, "Building parts");
 
         if (MapEditor.Instance.CurrentSelectedObject != null)
         {
@@ -99,13 +135,13 @@ public class MapEditorGUI : MonoBehaviour
                 MapEditor.Instance.CurrentSelectedObject = null;
             }
 
-            if (GUI.Button(new Rect(10, 270, 100, 30), "Test Map"))
-            {
-                // Debug.Log(MapLoader.Instance.GetJsonTrack());
-                SceneManager.LoadScene("Track");
-            }
+        }
 
-
+        if (GUI.Button(new Rect((Screen.width / 2) - 50, 20, 100, 30), "Test Map"))
+        {
+            Debug.Log(MapLoader.Instance.GetJsonTrack());
+            MapLoader.Instance.SaveToPrefs();
+            SceneManager.LoadScene("Track");
         }
 
     }
