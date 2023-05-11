@@ -50,7 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: 43d362c605183b14eb5ee33d6b67db62
-    m_Address: Cars/Ghost/ghost
+    m_Address: Editor/ghost
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 44c9d2ab18fd568488bf52f7a2bf5928
+    m_Address: Editor/default
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

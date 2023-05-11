@@ -7,6 +7,55 @@ public class MapSpawner
 
     public int RoadID = 0;
     public int BackgroundID = 0;
+    public int StuffID = 0;
+    public int ColliderID = 0;
+
+
+    public GameObject SpawnCollider(EditorParts editortype, bool editor)
+    {
+        ColliderID++;
+
+        var name = "collider" + ColliderID;
+        var go = new GameObject(name);
+
+        string assetPath = "Editor/" + editortype.ToString();
+        var sprite = GameResources.Instance.GetSprite("Stuff", assetPath);
+        var renderer = addSpriteRenderer(go, sprite);
+        renderer.size = new Vector2(64, 64);
+
+
+        if (editor)
+            addEditorSettings(go, assetPath, "Editor", editortype.ToString(), renderer.size, TrackPropertyType.COLLIDER);
+        else
+            addCollider(go, renderer.size);
+
+        return go;
+    }
+
+    public GameObject SpawnObstacle(StuffParts stuffType, bool editor)
+    {
+        StuffID++;
+
+        var name = "stuff" + StuffID;
+        var go = new GameObject(name);
+
+        string assetPath = "Stuff/" + stuffType.ToString();
+
+
+        var sprite = GameResources.Instance.GetSprite("Stuff", assetPath);
+        var spriteSize = addSpriteRenderer(go, sprite).size;
+
+
+        if (editor)
+            addEditorSettings(go, assetPath, "Stuff", stuffType.ToString(), spriteSize, TrackPropertyType.OBSTACLE);
+        else
+        {
+            addRigidBody(go);
+            addCollider(go, spriteSize);
+        }
+
+        return go;
+    }
 
     public GameObject SpawnRoad(MapParts roadtype, string set, bool editor)
     {
@@ -16,16 +65,14 @@ public class MapSpawner
         var go = new GameObject(name);
 
 
-        string assetPath = "";
-
-                assetPath = set + "/" + roadtype.ToString();
+        string assetPath = set + "/" + roadtype.ToString();
 
         var sprite = GameResources.Instance.GetSprite(set, assetPath);
 
         var spriteSize = addSpriteRenderer(go, sprite).size;
 
-        if(editor)
-        addEditorSettings(go, assetPath, set, roadtype.ToString(),  spriteSize, TrackPropertyType.ROAD);
+        if (editor)
+            addEditorSettings(go, assetPath, set, roadtype.ToString(), spriteSize, TrackPropertyType.ROAD);
 
         // roadObjects.Add(name, go);
 
@@ -47,12 +94,36 @@ public class MapSpawner
 
         var spriteSize = addSpriteRenderer(go, sprite).size;
 
-        if(editor)
-        addEditorSettings(go, assetPath, set, null, spriteSize, TrackPropertyType.BACKGROUND);
+        if (editor)
+            addEditorSettings(go, assetPath, set, null, spriteSize, TrackPropertyType.BACKGROUND);
 
         // roadObjects.Add(name, go);
 
         return go;
+    }
+
+
+    private Rigidbody2D addRigidBody(GameObject go)
+    {
+        var rigidBody = go.AddComponent<Rigidbody2D>();
+        rigidBody.bodyType = RigidbodyType2D.Dynamic;
+        rigidBody.useAutoMass = false;
+        rigidBody.gravityScale = 0;
+
+        rigidBody.freezeRotation = true;
+
+        rigidBody.drag = 3;
+        rigidBody.mass = 3;
+
+        return rigidBody;
+    }
+
+    private BoxCollider2D addCollider(GameObject go, Vector2 size)
+    {
+        var collider = go.AddComponent<BoxCollider2D>();
+        collider.size = size;
+
+        return collider;
     }
 
 
@@ -87,6 +158,6 @@ public class MapSpawner
 
         Vector3 lookAtPosition = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         go.transform.position = new Vector3(lookAtPosition.x, lookAtPosition.y, 0);
-    }    
+    }
 
 }

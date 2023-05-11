@@ -79,6 +79,11 @@ public class MapEditorGUI : MonoBehaviour
             editor.MapSpawner.SpawnBackground(SetName, true);
         }
 
+        if (GUI.Button(new Rect(10, 220, 50, 50), "CONE1"))
+        {
+            editor.MapSpawner.SpawnObstacle(StuffParts.roadcone_1, true);
+        }
+
         GUI.TextField(new Rect(10, 460, 180, 30), SetName);
 
         GUI.DragWindow(new Rect(0, 0, 10000, 20));

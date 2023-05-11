@@ -10,15 +10,23 @@ public enum MapParts
     medium_1 = 2,
     large_1 = 3,
     round90_s_1 = 4,
-    round90_m_1 = 5, 
+    round90_m_1 = 5,
     transition_ms_1 = 6,
     transition_ml_1 = 7
 
 }
 
-public enum StuffParts{
+public enum StuffParts
+{
     roadcone_1 = 0
 }
+
+public enum EditorParts
+{
+    ghost = 0,
+    @default = 1
+}
+
 
 public class GameResources : Singleton<GameResources>
 {
@@ -41,18 +49,22 @@ public class GameResources : Singleton<GameResources>
 
     public void LoadAssets()
     {
-        foreach (var spriteSet in loadedSpriteSets)
-        {
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.background_1.ToString());
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.small_1.ToString());
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.medium_1.ToString());
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.large_1.ToString());
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.round90_s_1.ToString());
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.round90_m_1.ToString());
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.transition_ms_1.ToString());
-            spriteSet.Value.LoadSpriteResource(spriteSet.Key + "/" + MapParts.transition_ml_1.ToString());
 
-        }
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.background_1.ToString());
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.small_1.ToString());
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.medium_1.ToString());
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.large_1.ToString());
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.round90_s_1.ToString());
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.round90_m_1.ToString());
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.transition_ms_1.ToString());
+        loadedSpriteSets["Prototype"].LoadSpriteResource("Prototype/" + MapParts.transition_ml_1.ToString());
+
+
+        loadedSpriteSets["Stuff"].LoadSpriteResource("Stuff/" + StuffParts.roadcone_1.ToString());
+
+        loadedSpriteSets["Editor"].LoadSpriteResource("Editor/" + EditorParts.ghost.ToString());
+        loadedSpriteSets["Editor"].LoadSpriteResource("Editor/" + EditorParts.@default.ToString());
+
     }
 
     public Sprite GetSprite(string set, string path)
@@ -60,9 +72,10 @@ public class GameResources : Singleton<GameResources>
         return loadedSpriteSets[set].GetSpriteResource(path);
     }
 
-    public void UnloadResources(){
+    public void UnloadResources()
+    {
 
-        
+
 
     }
 

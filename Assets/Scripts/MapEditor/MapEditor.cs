@@ -12,6 +12,7 @@ public class MapEditor : Singleton<MapEditor>
 
     public Vector2 SnappingGridSize = new Vector2(8, 8); 
 
+    public GameObject Selector = null;
     public GameObject CurrentSelectedObject = null;
 
     public Camera EditorCamera;
@@ -34,6 +35,9 @@ public class MapEditor : Singleton<MapEditor>
         CurrentObjectSelectionChanged = new UnityEvent<GameObject>();
 
         MapLoader = MapLoader.FindMe();
+
+        Selector = GameObject.Find("EditorSelector");
+        Selector.SetActive(false);
     }
 
 
@@ -55,6 +59,12 @@ public class MapEditor : Singleton<MapEditor>
                         CurrentSelectedObject = go;
 
                         this.CurrentObjectSelectionChanged.Invoke(CurrentSelectedObject);
+
+                        Selector.transform.position = CurrentSelectedObject.transform.position;
+                        var collider = CurrentSelectedObject.GetComponent<BoxCollider2D>();
+
+                        Selector.GetComponent<SpriteRenderer>().size = collider.size + new Vector2(0.01f,0.01f);
+                        Selector.SetActive(true);
                     }
 
                     break;
@@ -62,6 +72,7 @@ public class MapEditor : Singleton<MapEditor>
             }
         }else{
             CurrentSelectedObject = null;
+            Selector.SetActive(false);
         }
         
     }
@@ -78,6 +89,7 @@ public class MapEditor : Singleton<MapEditor>
             pos.x = pos.x / 100f;
             pos.y = pos.y / 100f;
 
+            Selector.transform.position = pos;
             CurrentSelectedObject.transform.position = pos;
 
         }

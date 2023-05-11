@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: a0ddd35290e43ad47b2b6055906b9403
   m_SerializeEntries:
   - m_GUID: 398dc572d3e43ad4dbf141848b900180
-    m_Address: stuff/roadcone_1
+    m_Address: Stuff/roadcone_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

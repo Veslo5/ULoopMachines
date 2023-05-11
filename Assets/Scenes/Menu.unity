@@ -657,6 +657,8 @@ MonoBehaviour:
   IsPersistant: 1
   SpriteSets:
   - Prototype
+  - Stuff
+  - Editor
 --- !u!4 &858887471
 Transform:
   m_ObjectHideFlags: 0

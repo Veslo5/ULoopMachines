@@ -26,12 +26,17 @@ public class MapBuilder : MonoBehaviour
                 case TrackPropertyType.BACKGROUND:
                     go = MapSpawner.SpawnBackground(roadPart.Set, false);
                     break;
-
                 case TrackPropertyType.ROAD:
                     go = MapSpawner.SpawnRoad((MapParts)Enum.Parse(typeof(MapParts), roadPart.CustomType), roadPart.Set, false);
                     break;
+                case TrackPropertyType.OBSTACLE:
+                    go = MapSpawner.SpawnObstacle((StuffParts)Enum.Parse(typeof(StuffParts), roadPart.CustomType), false);
+                    break;
+                case TrackPropertyType.COLLIDER:
+                    //go = MapSpawner.SpawnCollider()    
+                    break;
             }
-            
+
             go.transform.position = roadPart.Position;
             go.transform.localScale = roadPart.Scale;
             go.transform.eulerAngles = roadPart.Rotation;
