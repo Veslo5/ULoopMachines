@@ -7,7 +7,8 @@ public enum TrackPropertyType
     ROAD = 0,
     BACKGROUND = 1,
     COLLIDER = 2,
-    OBSTACLE = 3
+    OBSTACLE = 3,
+    EFFECT = 4
 }
 
 public class MapEditorProperty : MonoBehaviour

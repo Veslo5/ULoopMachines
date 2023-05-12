@@ -35,6 +35,9 @@ public class MapBuilder : MonoBehaviour
                 case TrackPropertyType.COLLIDER:
                     //go = MapSpawner.SpawnCollider()    
                     break;
+                case TrackPropertyType.EFFECT:
+                    go = MapSpawner.SpawnEffect((EffectParts)Enum.Parse(typeof(EffectParts), roadPart.CustomType), false);
+                    break;
             }
 
             go.transform.position = roadPart.Position;

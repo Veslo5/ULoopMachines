@@ -9,7 +9,29 @@ public class MapSpawner
     public int BackgroundID = 0;
     public int StuffID = 0;
     public int ColliderID = 0;
+    public int EffectID = 0;
 
+    public GameObject SpawnEffect(EffectParts effecttype, bool editor)
+    {
+        EffectID++;
+        var name = "effect" + EffectID;
+        var go = new GameObject(name);
+
+        string assetPath = "Effect/" + effecttype.ToString();
+        var sprite = GameResources.Instance.GetSprite("Effect", assetPath);
+
+        var renderer = addSpriteRenderer(go, sprite);
+
+        var effectData = go.AddComponent<EffectData>();
+
+        if (editor)
+            addEditorSettings(go, assetPath, "Effect", effecttype.ToString(), renderer.size, TrackPropertyType.EFFECT);
+        else
+            addCollider(go, renderer.size);
+
+
+        return go;
+    }
 
     public GameObject SpawnCollider(EditorParts editortype, bool editor)
     {

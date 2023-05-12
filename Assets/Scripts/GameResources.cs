@@ -27,6 +27,13 @@ public enum EditorParts
     @default = 1
 }
 
+public enum EffectParts
+{
+    boost = 0,
+    deathbox = 1,
+    mysterybox = 2
+}
+
 
 public class GameResources : Singleton<GameResources>
 {
@@ -64,6 +71,10 @@ public class GameResources : Singleton<GameResources>
 
         loadedSpriteSets["Editor"].LoadSpriteResource("Editor/" + EditorParts.ghost.ToString());
         loadedSpriteSets["Editor"].LoadSpriteResource("Editor/" + EditorParts.@default.ToString());
+
+        loadedSpriteSets["Effects"].LoadSpriteResource("Effects/" + EffectParts.boost.ToString());
+        loadedSpriteSets["Effects"].LoadSpriteResource("Effects/" + EffectParts.deathbox.ToString());
+        loadedSpriteSets["Effects"].LoadSpriteResource("Effects/" + EffectParts.mysterybox.ToString());
 
     }
 

@@ -11,9 +11,12 @@ public class CarController : MonoBehaviour
     public float accelerationFactor = 30.0f;
     public float turnFactor = 3.5f;
     public float maxSpeed = 20;
-
-
     public AnimationCurve JumpCurve;
+
+    [Header("Car effects")]
+    public int HP = 100;
+    public string CurrentEffect = null;
+
     private bool jumping;
 
     //Local variables
@@ -35,6 +38,66 @@ public class CarController : MonoBehaviour
     SpriteRenderer windowsSpriteRenderer;
 
     BoxCollider2D carCollider;
+
+
+    public void Damage(int amount)
+    {
+        HP -= amount;
+        if (HP < 100)
+        {
+            //Todo: kill
+        }
+    }
+
+    public void Heal(int amount)
+    {
+            HP += amount;
+        if (HP > 100)
+        {
+            HP = 100;
+        }
+    }
+
+    public void Push(Vector3 direction, float scale)
+    {
+        carRigidbody2D.AddForce(direction * scale, ForceMode2D.Impulse);
+        Debug.Log("Pushed");
+    }
+
+    public void Jump(float jumpHeightScale, float jumpPushScale)
+    {
+        if (jumping == false)
+        {
+            StartCoroutine(JumpCoroutine(jumpHeightScale, jumpPushScale));
+        }
+    }
+
+    public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)
+    {
+        lateralVelocity = GetLateralVelocity();
+        isBraking = false;
+
+        if (jumping)
+            return false;
+
+        //Check if we are moving forward and if the player is hitting the brakes. In that case the tires should screech.
+        if (accelerationInput < 0 && velocityVsUp > 0)
+        {
+            isBraking = true;
+            return true;
+        }
+
+        //If we have a lot of side movement then the tires should be screeching
+        if (Mathf.Abs(GetLateralVelocity()) > 4.0f)
+            return true;
+
+        return false;
+    }
+
+    public float GetVelocityMagnitude()
+    {
+        return carRigidbody2D.velocity.magnitude;
+    }
 
 
     //Awake is called when the script instance is being loaded.
@@ -60,7 +123,8 @@ public class CarController : MonoBehaviour
 
         if (playerInput.SpaceAction.Click)
         {
-            this.Jump(1.0f, 1.0f);
+            //this.Push(Vector3.up, 10f);
+            //this.Jump(1.0f, 1.0f);
         }
 
     }
@@ -145,43 +209,6 @@ public class CarController : MonoBehaviour
         return Vector2.Dot(transform.right, carRigidbody2D.velocity);
     }
 
-    public bool IsTireScreeching(out float lateralVelocity, out bool isBraking)
-    {
-        lateralVelocity = GetLateralVelocity();
-        isBraking = false;
-
-        if (jumping)
-            return false;
-
-        //Check if we are moving forward and if the player is hitting the brakes. In that case the tires should screech.
-        if (accelerationInput < 0 && velocityVsUp > 0)
-        {
-            isBraking = true;
-            return true;
-        }
-
-        //If we have a lot of side movement then the tires should be screeching
-        if (Mathf.Abs(GetLateralVelocity()) > 4.0f)
-            return true;
-
-        return false;
-    }
-
-    public float GetVelocityMagnitude()
-    {
-        return carRigidbody2D.velocity.magnitude;
-    }
-
-    public void Jump(float jumpHeightScale, float jumpPushScale)
-    {
-
-        if (jumping == false)
-        {
-            StartCoroutine(JumpCoroutine(jumpHeightScale, jumpPushScale));
-        }
-
-    }
-
     private IEnumerator JumpCoroutine(float jumpHeightScale, float jumpPushScale)
     {
         jumping = true;
@@ -212,10 +239,10 @@ public class CarController : MonoBehaviour
             yield return null;
         }
 
-        if (Physics2D.OverlapCircle(transform.position, 1.5f))
+        if (Physics2D.OverlapCircle(transform.position, 1f))
         {
             jumping = false;
-            Jump(0.2f, 0.6f);
+            Jump(jumpHeightScale / 2, jumpPushScale / 2);
         }
         else
         {
@@ -225,8 +252,37 @@ public class CarController : MonoBehaviour
             jumping = false;
         }
 
+    }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        var effectData = other.gameObject.GetComponent<EffectData>();
+        if (effectData != null)
+        {
+            if (effectData.Jump)
+            {
+                this.Jump(effectData.JumpHeightScale, effectData.JumpPushScale);
+            }
+        }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var effectData = other.gameObject.GetComponent<EffectData>();
+        if (effectData != null)
+        {
+            if (effectData.Boost)
+            {
+                this.Push(other.gameObject.transform.up, effectData.BoostScale);
+            }
+
+            if (effectData.Damage)
+            {
+                this.Damage(effectData.DamageValue);
+            }
+
+        }
     }
 
 }

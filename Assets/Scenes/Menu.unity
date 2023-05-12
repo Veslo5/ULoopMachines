@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 858887471}
   - component: {fileID: 858887470}
   - component: {fileID: 858887472}
+  - component: {fileID: 858887473}
   m_Layer: 0
   m_Name: '**RESOURCES**'
   m_TagString: Untagged
@@ -659,6 +660,7 @@ MonoBehaviour:
   - Prototype
   - Stuff
   - Editor
+  - Effects
 --- !u!4 &858887471
 Transform:
   m_ObjectHideFlags: 0
@@ -687,6 +689,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPersistant: 1
+--- !u!114 &858887473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858887469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f17ba2a10821f4742b257b5cc281677e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1080907741
 GameObject:
   m_ObjectHideFlags: 0

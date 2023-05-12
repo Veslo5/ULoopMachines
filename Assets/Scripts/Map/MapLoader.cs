@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class MapLoader : MonoBehaviour
@@ -33,9 +34,15 @@ public class MapLoader : MonoBehaviour
 
     }
 
-    public void SaveToDisc()
+    public void SaveToDisc(string name, string trackData)
     {
+        File.WriteAllText(Application.dataPath + "/Tracks/" + name + ".json", trackData);
+    }
 
+    public MapData LoadFromDisc(string name)
+    {
+        var trackData = File.ReadAllText(Application.dataPath + "/Tracks/" + name + ".json");
+        return JsonUtility.FromJson<MapData>(trackData);
     }
 
     public void SaveToPrefs()
