@@ -16,11 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 6f504691f3b4fbb449553eb775cff4b2
-  m_SerializeEntries:
-  - m_GUID: 317867796847aa145b2431f56172b943
-    m_Address: Assets/Prefabs/Decals/Decal01.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a41164b52b294584db6b1455af55679f, type: 2}
   m_SchemaSet:
